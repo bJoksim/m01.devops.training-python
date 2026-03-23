@@ -18,7 +18,7 @@ blocks:
         - name: "\U0001F4E6 Install Dependencies"
           commands:
             - cache restore
-            - pip install --cache-dir .pip_cache -r requirements.txt
+            - pip download --cache-dir .pip_cache -r requirements.txt
             - cache store
   - name: "\U0001F50D Code Quality"
     dependencies:
@@ -29,6 +29,9 @@ blocks:
           commands:
             - cache restore
             - make lint
+      prologue:
+        commands:
+          - checkout
   - name: "\U0001F9EA Test Suite"
     dependencies:
       - "\U0001F6E0️ Setup and Cache"
@@ -39,3 +42,6 @@ blocks:
           commands:
             - cache restore
             - make test
+      prologue:
+        commands:
+          - checkout
